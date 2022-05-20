@@ -32,7 +32,44 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
+  # config.action_mailer.raise_delivery_errors = false
+
+
+
+  # host = 'localhost:3000'   # Local server
+  # config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+  # config.action_mailer.delivery_method = :smtp
+
+  # ActionMailer::Base.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                  587,
+  #   domain:               'mail.google.com',
+  #   user_name:            'noreplyexample99@gmail.com',
+  #   password:             'Example99',
+  #   authentication:       'plain',
+  #   enable_starttls_auto:  true,
+  #   open_timeout:          5,
+  #   read_timeout:          5
+  # }
+
+
+# Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.delivery_method = :smtp
+  host = 'localhost:3000'        # Local server
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "noreplyexample99@gmail.com",
+    :password             => "Example99",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
 
   config.action_mailer.perform_caching = false
 
@@ -55,11 +92,9 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
-  config.action_mailer.raise_delivery_errors = false
-  host = 'example.com' # Don't use this literally; use your local dev host instead
 
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+
